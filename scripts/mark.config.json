@@ -1,0 +1,9 @@
+{
+  "project": "Benji Garmin Coach",
+  "ext": ".benji",
+  "previousExts": [],
+  "shellVersion": "1.0.0",
+  "minShell": "1.0.0",
+  "include": ["app", "web", "tests", "profile.example.json", "requirements.txt", ".env.example", "README.md", "CLAUDE.md"],
+  "exclude": ["node_modules", ".git", "marks", "handoff-history", "*.log", ".DS_Store", "__pycache__", ".venv", "*.pyc"]
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "mark": 1,
+    "name": "Mk I",
+    "title": "First working coach",
+    "notes": "Initial Garmin to Gemini coach: sync, snapshot, briefing, chat, secure login, HIG web UI.",
+    "created": "2026-11-05T09:32:15.199Z",
+    "file": "marks/out/BenjiGarminCoach-MkI.benji",
+    "sha256": "2465ab98e62243c485a199211502ebbfdede3e35fc0921f40405ec79fa7a4b67",
+    "bytes": 36703,
+    "minShell": "1.0.0",
+    "handoff": true
+  }
+]

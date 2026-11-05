@@ -1,0 +1,9 @@
+{
+  "name": "Benji",
+  "age": null,
+  "goals": ["Get fitter", "Build consistent training habits"],
+  "injuries": [],
+  "weekly_schedule": "",
+  "equipment": [],
+  "swearing": true
+}
