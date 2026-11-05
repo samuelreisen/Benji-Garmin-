@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)">
+  <title>Benji Coach</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="hig-tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Login -->
+  <main id="login-view" class="login" hidden>
+    <form id="login-form" class="login-card" autocomplete="on">
+      <h1 class="hig-large-title">Benji Coach</h1>
+      <p class="hig-secondary">Your Garmin data, your coach. Log in to carry on.</p>
+      <label class="field">
+        <span class="hig-footnote">Password</span>
+        <input id="password" class="hig-input" type="password" autocomplete="current-password" required>
+      </label>
+      <p id="login-error" class="error" role="alert" hidden></p>
+      <button class="hig-btn hig-btn--prominent" type="submit">Log in</button>
+    </form>
+  </main>
+
+  <!-- App -->
+  <div id="app-view" hidden>
+    <header class="topbar hig-glass">
+      <h1 id="screen-title" class="hig-title1">Today</h1>
+      <button id="sync-btn" class="hig-btn" type="button">Sync now</button>
+    </header>
+    <p id="sync-status" class="hig-caption sync-status" role="status"></p>
+
+    <main class="screens">
+      <!-- Today -->
+      <section id="screen-today" class="screen" aria-labelledby="screen-title">
+        <article class="card">
+          <div class="card-head">
+            <h2 class="hig-headline">Morning briefing</h2>
+            <button id="briefing-refresh" class="hig-btn hig-btn--plain small" type="button">Refresh</button>
+          </div>
+          <div id="briefing-body" class="prose"></div>
+        </article>
+
+        <h2 class="section-title hig-footnote">Right now</h2>
+        <div id="metric-grid" class="metric-grid"></div>
+
+        <h2 class="section-title hig-footnote">Training</h2>
+        <div id="training" class="hig-group"></div>
+      </section>
+
+      <!-- Coach -->
+      <section id="screen-coach" class="screen" hidden aria-labelledby="screen-title">
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <div id="chat-empty" class="empty">
+          <p class="hig-headline">Ask your coach anything</p>
+          <p class="hig-secondary">It knows your sleep, HRV, recovery and training. Try one of these.</p>
+          <div class="chips" id="chips"></div>
+        </div>
+        <form id="chat-form" class="composer hig-glass">
+          <label class="visually-hidden" for="chat-input">Message your coach</label>
+          <input id="chat-input" class="hig-input" type="text" maxlength="2000" placeholder="Ask your coach" autocomplete="off" required>
+          <button class="hig-btn hig-btn--prominent" type="submit" id="chat-send">Send</button>
+        </form>
+        <button id="chat-clear" class="hig-btn hig-btn--plain hig-btn--destructive small" type="button" hidden>Clear chat</button>
+      </section>
+
+      <!-- Trends -->
+      <section id="screen-trends" class="screen" hidden aria-labelledby="screen-title">
+        <p class="hig-secondary">Last 28 days. The line shows each day, the numbers compare this week to your usual.</p>
+        <div id="trend-list" class="hig-group"></div>
+      </section>
+
+      <!-- Profile -->
+      <section id="screen-profile" class="screen" hidden aria-labelledby="screen-title">
+        <form id="profile-form">
+          <p class="hig-secondary">The coach reads this every time, so keep it honest.</p>
+          <div class="hig-group form-group">
+            <label class="field"><span class="hig-footnote">Name</span><input id="p-name" class="hig-input" maxlength="40"></label>
+            <label class="field"><span class="hig-footnote">Age</span><input id="p-age" class="hig-input" type="number" min="10" max="100" inputmode="numeric"></label>
+            <label class="field"><span class="hig-footnote">Goals (one per line)</span><textarea id="p-goals" class="hig-input" rows="3"></textarea></label>
+            <label class="field"><span class="hig-footnote">Injuries or niggles (one per line)</span><textarea id="p-injuries" class="hig-input" rows="3"></textarea></label>
+            <label class="field"><span class="hig-footnote">Weekly schedule</span><textarea id="p-schedule" class="hig-input" rows="3" maxlength="500"></textarea></label>
+            <label class="field"><span class="hig-footnote">Equipment (one per line)</span><textarea id="p-equipment" class="hig-input" rows="3"></textarea></label>
+            <label class="field toggle"><input id="p-swearing" type="checkbox"><span>Let the coach swear</span></label>
+          </div>
+          <p id="profile-status" class="hig-caption" role="status"></p>
+          <button class="hig-btn hig-btn--prominent" type="submit">Save profile</button>
+          <button id="logout-btn" class="hig-btn hig-btn--plain hig-btn--destructive" type="button">Log out</button>
+        </form>
+      </section>
+    </main>
+
+    <nav class="tabbar hig-glass" aria-label="Main">
+      <button class="tab" data-tab="today" aria-current="page" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Today</span>
+      </button>
+      <button class="tab" data-tab="coach" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M4 5h16v11H9l-5 4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        <span>Coach</span>
+      </button>
+      <button class="tab" data-tab="trends" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 17l5-6 4 4 8-10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>Trends</span>
+      </button>
+      <button class="tab" data-tab="profile" type="button">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        <span>Profile</span>
+      </button>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
